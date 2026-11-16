@@ -7,13 +7,16 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Tracker">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C0F0D" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ===== Wisp Tracker design system ===== */
 :root{
---bg:#F3F5F3;--card:#FFFFFF;--ink:#111814;--mute:#56615A;--line:#E3E8E4;--line2:#CBD3CE;--fill:#EDF0EE;--bar:#CDD6D0;
+--top:#FFFFFF;--bg:#F3F5F3;--card:#FFFFFF;--ink:#111814;--mute:#56615A;--line:#E3E8E4;--line2:#CBD3CE;--fill:#EDF0EE;--bar:#CDD6D0;
 --g:#2F7A44;--gt:#25683A;--gban:#2F7A44;--gsoft:rgba(47,122,68,.11);--onG:#FFFFFF;
 --bad:#B93B36;--badsoft:rgba(200,69,63,.1);--warn:#8F5B0B;--ok:#2F7A44;--flame:#F2822B;
 --sh1:0 1px 2px rgba(16,24,20,.06),0 0 0 .5px rgba(16,24,20,.05);--sh2:0 8px 28px rgba(16,24,20,.14);
@@ -22,18 +25,19 @@
 color-scheme:light}
 /*SAFE*/:root{padding-top:env(safe-area-inset-top,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
---bg:#0C0F0D;--card:#161A17;--ink:#EEF2EF;--mute:#9AA59E;--line:#262C28;--line2:#3A423D;--fill:#202521;--bar:#323A35;
+--top:#0C0F0D;--bg:#0C0F0D;--card:#161A17;--ink:#EEF2EF;--mute:#9AA59E;--line:#262C28;--line2:#3A423D;--fill:#202521;--bar:#323A35;
 --g:#5BBE78;--gt:#5BBE78;--gban:#1F5A34;--gsoft:rgba(91,190,120,.16);--onG:#07130B;
 --bad:#EF7A73;--badsoft:rgba(239,122,115,.16);--warn:#E5B04A;--ok:#5BBE78;
 --sh1:0 0 0 .5px rgba(255,255,255,.07);--sh2:0 10px 30px rgba(0,0,0,.55);color-scheme:dark}}
 :root[data-theme="dark"]{
---bg:#0C0F0D;--card:#161A17;--ink:#EEF2EF;--mute:#9AA59E;--line:#262C28;--line2:#3A423D;--fill:#202521;--bar:#323A35;
+--top:#0C0F0D;--bg:#0C0F0D;--card:#161A17;--ink:#EEF2EF;--mute:#9AA59E;--line:#262C28;--line2:#3A423D;--fill:#202521;--bar:#323A35;
 --g:#5BBE78;--gt:#5BBE78;--gban:#1F5A34;--gsoft:rgba(91,190,120,.16);--onG:#07130B;
 --bad:#EF7A73;--badsoft:rgba(239,122,115,.16);--warn:#E5B04A;--ok:#5BBE78;
 --sh1:0 0 0 .5px rgba(255,255,255,.07);--sh2:0 10px 30px rgba(0,0,0,.55);color-scheme:dark}
 
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+html{background:var(--top);-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:var(--top);z-index:50;pointer-events:none}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--font);min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-wrap:anywhere}
 main{max-width:520px;margin:0 auto;padding:8px 16px calc(120px + env(safe-area-inset-bottom,0px))}
 [hidden]{display:none!important}
@@ -890,7 +894,7 @@ function fxLevel(){return S.fx||((window.matchMedia&&matchMedia('(prefers-reduce
 function applyFx(){var l=fxLevel();document.documentElement.setAttribute('data-fx',l===1?'full':l===2?'calm':'quiet');}
 function segFx(){var l=fxLevel(),bs=$('fxs').children,i,on;for(i=0;i<bs.length;i++){on=+bs[i].getAttribute('data-m')===l;bs[i].className=on?'on':'';bs[i].setAttribute('aria-pressed',on);}$('fxn').textContent=l===1?'Animations and vibration.':l===2?'No animations. Vibration stays on.':'No animations and no vibration.';segPlace($('fxs'));}
 $('fxs').onclick=function(e){var b=e.target.closest?e.target.closest('[data-m]'):null;if(!b)return;S.fx=+b.getAttribute('data-m');S.hap=S.fx===3?0:1;save();applyFx();segFx();};
-function applyTheme(){var d=S.theme==='dark'||(S.theme==='auto'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.setAttribute('data-theme',d?'dark':'light');segTheme();}
+function applyTheme(){var d=S.theme==='dark'||(S.theme==='auto'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.setAttribute('data-theme',d?'dark':'light');var tc=d?'#0C0F0D':'#FFFFFF';document.querySelectorAll('meta[name="theme-color"]').forEach(function(m){m.setAttribute('content',tc);m.removeAttribute('media');});segTheme();}
 $('theme').onclick=function(e){var b=e.target.closest?e.target.closest('[data-t]'):null;if(!b)return;S.theme=b.getAttribute('data-t');save();applyTheme();};
 
 function segTheme(){var bs=[].slice.call($('theme').children);for(var i=0;i<bs.length;i++){var on=bs[i].getAttribute('data-t')===S.theme;bs[i].className=on?'on':'';bs[i].setAttribute('aria-pressed',on);}segPlace($('theme'));}
