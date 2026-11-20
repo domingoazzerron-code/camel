@@ -49,7 +49,7 @@ if(jb&&shown.length){
     const first=host.querySelector(".pf-sec:not([hidden])");
     if(first){
       const y=first.getBoundingClientRect().top+scrollY-(jb.offsetHeight+72);
-      if(Math.abs(scrollY-y)>40)scrollTo({top:Math.max(0,y),behavior:"smooth"});
+      if(Math.abs(scrollY-y)>40)scrollTo({top:Math.max(0,y),behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
     }
     track("Portfolio Filter",{label:k});
   });
@@ -57,7 +57,7 @@ if(jb&&shown.length){
 
 /* Fade-in for new blocks */
 if(window.matchMedia&&!matchMedia("(prefers-reduced-motion:reduce)").matches&&"IntersectionObserver" in window){
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{rootMargin:"0px 0px -6% 0px"});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.08,rootMargin:"0px 0px -4% 0px"});
   document.querySelectorAll(".rv:not(.in)").forEach(n=>io.observe(n));
 }else document.querySelectorAll(".rv").forEach(n=>n.classList.add("in"));
 

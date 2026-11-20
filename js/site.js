@@ -47,7 +47,7 @@ const hd=$("site"),tp=()=>{if(hd)hd.classList.toggle("scrolled",scrollY>8)};
 addEventListener("scroll",tp,{passive:true});tp();
 (()=>{window.__rv=1;const els=[...document.querySelectorAll(".rv")];
 if(!("IntersectionObserver" in window)||!document.documentElement.classList.contains("anim")){els.forEach(el=>el.classList.add("in"));return}
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;el.classList.add("in");io.unobserve(el);setTimeout(()=>el.style.removeProperty("--d"),1600)}),{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;el.classList.add("in");io.unobserve(el);setTimeout(()=>el.style.removeProperty("--d"),1600)}),{threshold:.08,rootMargin:"0px 0px -4% 0px"});
 els.forEach(el=>io.observe(el))})();
 
 
@@ -192,3 +192,36 @@ f.addEventListener("submit",async e=>{e.preventDefault();if(!valid(cur))return;
  catch(err){if(sent)return;track("Details Error");msg.textContent="The form couldn’t send, so we’re opening your email app with your details ready. If nothing opens, email us at "+TO+".";location.href=mailto()}
  finally{nxt.disabled=false;nxt.textContent=SEND}});
 show(0)})();
+
+/* ===== Navigation polish: active page, scroll restore, focus ===== */
+(()=>{
+  /* Mark current page in the nav */
+  const path=(location.pathname.split("/").pop()||"index.html").toLowerCase();
+  document.querySelectorAll("nav a[href]").forEach(a=>{
+    const href=(a.getAttribute("href")||"").split("#")[0].split("/").pop().toLowerCase();
+    if(!href)return;
+    const isHome=(path===""||path==="index.html")&&(href==="index.html"||href===""||href==="#");
+    const match=href===path||isHome;
+    if(match)a.setAttribute("aria-current","page");
+  });
+
+  /* After a same-origin navigation, land at the top unless there's a hash */
+  if("scrollRestoration" in history)history.scrollRestoration="manual";
+  if(!location.hash){
+    /* Small delay so view-transition can settle */
+    requestAnimationFrame(()=>{if(scrollY>0&&!reduce)scrollTo(0,0)});
+  }
+
+  /* Close mobile menu when orientation changes or resize crosses breakpoint */
+  const mq=matchMedia("(min-width:901px)");
+  const menu=$("menu"),nav=$("nav");
+  if(menu&&nav){
+    mq.addEventListener("change",()=>{if(mq.matches){nav.classList.remove("open");menu.setAttribute("aria-expanded","false")}});
+  }
+
+  /* Keyboard: Escape closes any open dialog */
+  addEventListener("keydown",e=>{
+    if(e.key!=="Escape")return;
+    document.querySelectorAll("dialog[open]").forEach(d=>{try{d.close()}catch(x){}});
+  });
+})();
