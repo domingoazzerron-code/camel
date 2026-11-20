@@ -93,3 +93,14 @@ $("pc").onclick=()=>dlg.close();
 dlg.addEventListener("close",()=>$("yt").removeAttribute("src"));
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
 })();
+
+/* Sticky filter: add is-stuck class when pinned */
+(()=>{const bar=$("pfj");if(!bar||!("IntersectionObserver" in window))return;
+const sentinel=document.createElement("div");
+sentinel.setAttribute("aria-hidden","true");
+sentinel.style.cssText="position:relative;top:-1px;height:1px;width:100%;pointer-events:none;visibility:hidden";
+bar.parentNode.insertBefore(sentinel,bar);
+const io=new IntersectionObserver(([e])=>{bar.classList.toggle("is-stuck",!e.isIntersecting)},{rootMargin:"-1px 0px 0px 0px",threshold:0});
+io.observe(sentinel);
+})();
+
