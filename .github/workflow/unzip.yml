@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "weddingsite-reorganized.zip"
+  workflow_dispatch:   # lets you run it manually too
 
 jobs:
   unzip:
@@ -13,25 +14,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract zip to root
         run: |
+          set -e
           if [ ! -f "weddingsite-reorganized.zip" ]; then
-            echo "Zip not found"
+            echo "ERROR: weddingsite-reorganized.zip not found in root"
+            ls -la
             exit 1
           fi
-          echo "Extracting weddingsite-reorganized.zip..."
+          echo "Extracting..."
           unzip -o weddingsite-reorganized.zip -d .
           echo "Removing zip..."
           rm -f weddingsite-reorganized.zip
+          echo "Files after extract:"
+          ls -la
 
-      - name: Commit extracted files
+      - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           if git diff --staged --quiet; then
-            echo "Nothing to commit"
+            echo "Nothing new to commit"
           else
             git commit -m "Extract site from zip and remove archive"
             git push
