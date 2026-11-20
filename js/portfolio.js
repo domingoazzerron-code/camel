@@ -26,7 +26,7 @@ FILMS.forEach(f=>{(groups.find(g=>g.re.test(f.type))||groups[groups.length-1]).f
 const shown=groups.filter(g=>g.films.length);
 let order=shown.flatMap(g=>g.films);
 
-const card=(f,n,firstSec)=>`<button class="film" style="--i:${n%6}" type="button" data-id="${esc(f.v)}" data-kind="${esc(f.kind)}" aria-label="Watch ${esc(f.label)} film"><img src="https://img.youtube.com/vi/${esc(f.v)}/hq720.jpg" onerror="this.onerror=null;this.src=this.src.replace('hq720','hqdefault')" alt="" ${n<2&&firstSec?'fetchpriority="high"':'loading="lazy"'} decoding="async" width="480" height="270"><span class="play" aria-hidden="true"></span><span class="pf-badge">${esc(f.label)}</span></button>`;
+const card=(f,n,firstSec)=>`<button class="film" style="--i:${n%6}" type="button" data-id="${esc(f.v)}" data-kind="${esc(f.kind)}" aria-label="Watch ${esc(f.label)} film${f.meta?" — "+esc(f.meta):""}"><img src="https://img.youtube.com/vi/${esc(f.v)}/hq720.jpg" onerror="this.onerror=null;this.src=this.src.replace('hq720','hqdefault')" alt="" ${n<2&&firstSec?'fetchpriority="high"':'loading="lazy"'} decoding="async" width="480" height="270"><span class="play" aria-hidden="true"></span><span class="pf-badge">${esc(f.label)}</span></button>`;
 
 host.innerHTML=shown.map((g,gi)=>`<section class="pf-sec rv" id="sec-${g.k}" data-kind="${g.k}" aria-labelledby="pf-${g.k}"><div class="pf-t"><h2 id="pf-${g.k}">${g.h}</h2><span class="pf-n">${g.films.length} ${g.films.length===1?"film":"films"}</span></div><p>${g.d}</p><div class="pf-grid">${g.films.map((f,n)=>card(f,n,gi===0)).join("")}</div></section>`).join("");
 
