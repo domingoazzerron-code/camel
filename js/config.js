@@ -6,7 +6,7 @@ const CFG={
  whatsapp:"639703895918",        // Number with country code, digits only, e.g. "639171234567"
  instagram:"https://instagram.com/marcusweddingstudio",       // Full profile URL, e.g. "https://instagram.com/yourhandle"
  youtube:"https://www.youtube.com/@MarcusWeddingEditor",  // Full channel URL
- facebook:"",        // Full page URL
+ facebook:"https://facebook.com/marcus.dew.2026",        // Full page URL
  clients:[],         // Studios you edit for, only with their permission: [{name:"Studio name",logo:"assets/media/studio.svg",url:"https://…"}]. Empty = strip stays hidden.
  tawk:"", // Tawk.to live chat: "propertyId/widgetId" from your Tawk.to widget code. Empty = no chat box.
  booking:""          // Calendly / booking link, e.g. "https://calendly.com/yourname/intro". Shows "Book a call" buttons.

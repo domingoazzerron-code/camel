@@ -1886,3 +1886,8 @@ input,select,textarea{
 .wa-fab svg{width:22px;height:22px}
 html.has-wa .top{bottom:calc(4.1rem + env(safe-area-inset-bottom,0px))}
 }
+
+/* Pricing page: hide the floating WhatsApp button (it covered the prices); the page has its own "Get my exact price" buttons. Same approach as the contact page. */
+html:has(#pg-pricing) .wa-fab{display:none!important}
+html:has(#pg-pricing).has-wa .top{bottom:calc(1.25rem + env(safe-area-inset-bottom,0px))}
+@media(max-width:520px){html:has(#pg-pricing).has-wa .top{bottom:calc(.9rem + env(safe-area-inset-bottom,0px))}}
