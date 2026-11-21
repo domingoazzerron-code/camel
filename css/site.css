@@ -1836,3 +1836,7 @@ input,select,textarea{
     animation:shimmer 1.2s linear infinite;
   }
 }
+
+/* ===== Filter bar offset follows the real header height (set by portfolio.js as --hh) ===== */
+.pf-jump{top:var(--hh,5rem)!important}
+.pf-sec{scroll-margin-top:calc(var(--hh,5rem) + 4.5rem)!important}
