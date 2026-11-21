@@ -12,6 +12,7 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-ev]");if(a
 (()=>{const ch=[];
  if(CFG.whatsapp){const u="https://wa.me/"+CFG.whatsapp.replace(/\D/g,"")+"?text="+encodeURIComponent("Hi Marcus Wedding Studio, I’d like to ask about an edit.");ch.push(["WhatsApp",u]);document.querySelectorAll(".wa").forEach(a=>{a.href=u;a.hidden=false});document.documentElement.classList.add("has-wa")}
  if(CFG.instagram)ch.push(["Instagram",CFG.instagram]);
+ if(CFG.youtube)ch.push(["YouTube",CFG.youtube]);
  if(CFG.facebook)ch.push(["Facebook",CFG.facebook]);
  if(CFG.booking)document.querySelectorAll(".bk").forEach(a=>{a.href=CFG.booking;a.hidden=false});
  const all=CFG.booking?[...ch,["Book a call",CFG.booking]]:ch;

@@ -1874,3 +1874,15 @@ input,select,textarea{
 .bp-fine{margin:.85rem 0 0;font:400 .78rem/1.5 var(--f-body);color:var(--sand)}
 @media(max-width:480px){.bp-opt{gap:.75rem;padding:.95rem .9rem}.bp-main strong{font-size:1.12rem}.bp-price{font-size:1.3rem}.bp-ex{margin-left:3.1rem}}
 @media(prefers-reduced-motion:reduce){.bp-opt,.bp-tick,.bp-tick svg,.bp-chips li,.bp-deal.pop span{transition:none!important;animation:none!important}}
+
+/* Phones: compact left-aligned promise pills (the 3–5 day pill repeats the line right below), and a smaller floating button tucked into the corner */
+@media(max-width:520px){
+.promise{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:.4rem .45rem;margin-left:0;margin-right:0;max-width:none}
+.promise li{font-size:.75rem;padding:.3rem .6rem}
+.promise li:nth-child(4){display:none}
+.promise li::before{display:none}
+.wa-fab,.top{width:44px;height:44px;right:.75rem}
+.wa-fab{bottom:calc(.9rem + env(safe-area-inset-bottom,0px))}
+.wa-fab svg{width:22px;height:22px}
+html.has-wa .top{bottom:calc(4.1rem + env(safe-area-inset-bottom,0px))}
+}
