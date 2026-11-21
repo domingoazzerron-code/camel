@@ -18,11 +18,8 @@ window.SITE_FILMS=[
 ];
 window.SITE_RECENT=[
 ["UMfn5n1y3WQ","E & J","Wedding highlights","Full-day story"],
-["qQe6p5eHqvs","S & G","Wedding highlights","Full-day story"],
 ["TFfA5JCuM-0","M & S","Wedding highlights","Full-day story"],
 ["1u0ULhVUvvM","M & D","Wedding highlights","Full-day story"],
-["NN3BbEYAyjQ","M & D","Wedding teaser","Short social cut"],
 ["wE38AcaPE00","G & A","Wedding highlights","Full-day story"],
-["1kHFaY5qJz0","G & A","Wedding teaser","Short social cut"],
 ["SUk7rLgGK6Y","G & D","Wedding highlights","Full-day story"]
 ];
