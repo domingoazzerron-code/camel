@@ -104,3 +104,11 @@ const io=new IntersectionObserver(([e])=>{bar.classList.toggle("is-stuck",!e.isI
 io.observe(sentinel);
 })();
 
+
+/* Keep sticky filter bar directly under the header, whatever its height */
+(()=>{const hd=document.getElementById("site");if(!hd)return;
+const set=()=>document.documentElement.style.setProperty("--hh",Math.round(hd.getBoundingClientRect().height)+"px");
+set();addEventListener("resize",set,{passive:true});addEventListener("load",set);
+if("ResizeObserver" in window)new ResizeObserver(set).observe(hd);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(set);
+})();
