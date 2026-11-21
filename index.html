@@ -54,7 +54,7 @@
 <section class="work" id="work">
 <div class="rv"><h2>Recent work</h2><p class="rev-s">A few of our latest teasers and highlight films. Swipe through them, tap one to watch it, or see everything in the portfolio.</p></div>
 <div class="pbox wbox rv">
-<div class="grid wcar" id="grid" tabindex="0" role="region" aria-label="Recent films"><noscript><ul class="nojs"><li><a href="https://www.youtube.com/watch?v=1kHFaY5qJz0" rel="noopener">G &amp; A – Wedding teaser</a></li><li><a href="https://www.youtube.com/watch?v=NN3BbEYAyjQ" rel="noopener">M &amp; D – Wedding teaser</a></li><li><a href="https://www.youtube.com/watch?v=1u0ULhVUvvM" rel="noopener">M &amp; D – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=TFfA5JCuM-0" rel="noopener">M &amp; S – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=wE38AcaPE00" rel="noopener">G &amp; A – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=qQe6p5eHqvs" rel="noopener">S &amp; G – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=SIyY_ykB4uE" rel="noopener">A &amp; J – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=-BiQK0gYHFM" rel="noopener">B &amp; I – Wedding teaser</a></li><li><a href="https://www.youtube.com/watch?v=vksNaP4HbGo" rel="noopener">B &amp; I – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=SUk7rLgGK6Y" rel="noopener">G &amp; D – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=lnMzKS5-YYM" rel="noopener">A &amp; Z – Wedding teaser</a></li></ul></noscript></div>
+<div class="grid wcar" id="grid" tabindex="0" role="region" aria-label="Recent films"><noscript><ul class="nojs"><li><a href="https://www.youtube.com/watch?v=UMfn5n1y3WQ" rel="noopener">E &amp; J – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=qQe6p5eHqvs" rel="noopener">S &amp; G – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=TFfA5JCuM-0" rel="noopener">M &amp; S – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=1u0ULhVUvvM" rel="noopener">M &amp; D – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=NN3BbEYAyjQ" rel="noopener">M &amp; D – Wedding teaser</a></li><li><a href="https://www.youtube.com/watch?v=wE38AcaPE00" rel="noopener">G &amp; A – Wedding highlights</a></li><li><a href="https://www.youtube.com/watch?v=1kHFaY5qJz0" rel="noopener">G &amp; A – Wedding teaser</a></li><li><a href="https://www.youtube.com/watch?v=SUk7rLgGK6Y" rel="noopener">G &amp; D – Wedding highlights</a></li></ul></noscript></div>
 <div class="ctl"><button type="button" id="wprev" aria-label="Previous film">←</button><div class="dots2" id="wdots"></div><button type="button" id="wnext" aria-label="Next film">→</button></div>
 </div>
 <div class="films-cta rv"><p>Want to see more? Browse every teaser and highlight film in the portfolio.</p><div class="films-btns"><a class="btn" href="portfolio.html" data-ev="CTA Click" data-label="Home: View portfolio">View full portfolio</a></div></div>
@@ -163,95 +163,14 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-ev]");if(a
 
 if(CFG.clients.length){$("cl").innerHTML=CFG.clients.map(c=>{const i=c.logo?`<img src="${esc(c.logo)}" alt="${esc(c.name)}" loading="lazy" decoding="async">`:esc(c.name);return `<li>${c.url?`<a href="${esc(c.url)}" target="_blank" rel="noopener">${i}</a>`:i}</li>`}).join("");$("clients").hidden=false}
 /* Films: [YouTube ID, title, type, optional details such as "4:12 · Cinematic"] */
-const SIG=JSON.stringify([window.SITE_RECENT||window.SITE_FILMS||[],window.SITE_HERO||{}]);
 const HERO=Object.assign({feature:["","",""],mini:["","",""]},JSON.parse(JSON.stringify(window.SITE_HERO||{})));
 const FILMS=(window.SITE_RECENT||window.SITE_FILMS||[]).map(([v,title,type,meta])=>({v,title,type,meta:meta||""}));
-/* Owner edit mode: open the page with ?edit to add, replace or remove films (grid and the two large cards). Edits show in this browser until you publish them; Publish/Download saves them to films.js, so replacing index.html never undoes them. */
-(()=>{const KEY="filmsEdit",HK="heroEdit",row=f=>[f.v,f.title,f.type].concat(f.meta?[f.meta]:[]),ID=/^[\w-]{11}$/;
-try{const fb=localStorage.getItem("filmsBase");if(fb!==null&&fb!==SIG){localStorage.removeItem(KEY);localStorage.removeItem(HK);localStorage.removeItem("filmsBase")}}catch(e){}
-try{const s=JSON.parse(localStorage.getItem(KEY)||"null");
- if(Array.isArray(s)&&s.length)FILMS.splice(0,FILMS.length,...s.filter(r=>Array.isArray(r)&&ID.test(r[0])).map(([v,title,type,meta])=>({v,title:String(title||""),type:String(type||""),meta:meta||""})))}catch(e){}
-try{const h=JSON.parse(localStorage.getItem(HK)||"null");if(h)["feature","mini"].forEach(k=>{if(Array.isArray(h[k])&&ID.test(h[k][0]))HERO[k]=h[k].slice(0,3).map(String)})}catch(e){}
 /* large cards at the top of the page */
-const setHero=(k,[v,title,type])=>{const b=document.querySelector(".film."+k);if(!b||!v)return;
+(()=>{const setHero=(k,[v,title,type])=>{const b=document.querySelector(".film."+k);if(!b||!v)return;
  b.dataset.v=v;b.setAttribute("aria-label","Watch "+title+", "+type.toLowerCase()+", on YouTube");
  const im=b.querySelector("img");if(im&&im.src.indexOf("/vi/"+v+"/")<0)im.src="https://img.youtube.com/vi/"+v+"/hq720.jpg";
  const c=b.querySelector(".cap");if(c)c.innerHTML=esc(title)+"<small>"+esc(type)+"</small>"};
-setHero("feature",HERO.feature);setHero("mini",HERO.mini);
-let own=false,fresh=false;try{if(CFG.editKey&&new URLSearchParams(location.search).get("edit")===CFG.editKey){localStorage.setItem("ownerEdit","1");fresh=true;history.replaceState(null,"",location.pathname+"#fedit")}own=!!CFG.editKey&&localStorage.getItem("ownerEdit")==="1"}catch(e){}
-if(!own)return;
-const fab=document.createElement("button");fab.type="button";fab.className="edit-fab";fab.setAttribute("aria-label","Edit films");
-fab.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>';document.body.appendChild(fab);
-fab.addEventListener("click",()=>{const el=document.getElementById("fedit");if(el)el.scrollIntoView({behavior:"smooth",block:"start"})});
-const parse=u=>{u=u.trim();if(ID.test(u))return u;try{const x=new URL(u),h=x.hostname;
- if(/(^|\.)youtu\.be$/.test(h)){const i=x.pathname.slice(1).split("/")[0];return ID.test(i)?i:null}
- if(/(^|\.)youtube(-nocookie)?\.com$/.test(h)){const q=x.searchParams.get("v");if(q&&ID.test(q))return q;const m=x.pathname.match(/^\/(?:embed|shorts|live|v)\/([\w-]{11})/);return m?m[1]:null}}catch(e){}return null};
-const opts=`<option>Wedding teaser</option><option>Wedding highlights</option><option>Wedding full film</option>`;
-const p=document.createElement("div");p.className="fedit";p.id="fedit";
-p.innerHTML=`<header class="fe-hd"><h3>Edit films</h3><span class="fe-chip">Only you see this</span><a class="fe-x" href="${location.pathname}#work">Exit</a></header>
-<form id="fe-f" class="fe-card"><p class="fe-s">Add or change a video</p>
-<div class="fe-g">
-<label class="fe-full">YouTube link<input id="fe-u" type="text" inputmode="url" placeholder="https://www.youtube.com/watch?v=…" required autocomplete="off"></label>
-<label>Couple names<input id="fe-t" type="text" placeholder="e.g. J &amp; M" required maxlength="40" autocomplete="off"></label>
-<label>Type<select id="fe-y">${opts}</select></label>
-<label class="fe-full">Where<select id="fe-w"><option value="grid">Film grid</option><option value="feature">Large card (top of page)</option><option value="mini">Small card (top of page)</option></select></label>
-</div><button class="btn" type="submit" id="fe-s">Add video</button></form>
-<section class="fe-card"><p class="fe-s">Top of page</p><ul class="fe-ls" id="fe-h"></ul></section>
-<section class="fe-card"><p class="fe-s">Film grid <span id="fe-c"></span></p><ul class="fe-ls" id="fe-l"></ul></section>
-<div class="fe-a"><button class="btn" type="button" id="fe-p">Publish to website</button><button class="btn ghost" type="button" id="fe-d">Download films.js</button><button class="btn ghost" type="button" id="fe-r">Reset</button></div>
-<p class="fe-m" id="fe-m" role="status"></p>
-<details class="fe-set" id="fe-set"><summary>One-time setup for Publish</summary>
-<ol><li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub’s new token page</a> and sign in.</li>
-<li>Name it (e.g. “Film editor”) and set an expiry.</li>
-<li>Under <b>Repository access</b>, choose <b>Only select repositories</b> and pick this site’s repository.</li>
-<li>Under <b>Permissions</b>, add <b>Contents</b> and set it to <b>Read and write</b>, then create the token and copy it.</li>
-<li>Paste it here. It is saved only in this browser, never on the site itself.</li></ol>
-<div class="fe-tk"><input id="fe-k" type="password" placeholder="GitHub token" autocomplete="off" aria-label="GitHub token"><button class="btn" type="button" id="fe-ks">Save token</button><button class="btn ghost" type="button" id="fe-kf">Forget token</button></div></details>`;
-$("grid").closest(".wbox").before(p);
-if(fresh||location.hash==="#fedit"){try{history.scrollRestoration="manual"}catch(e){}let u=false;["wheel","touchstart","keydown"].forEach(t=>addEventListener(t,()=>{u=true},{once:true,passive:true}));const go=()=>{if(!u)p.scrollIntoView({block:"start",behavior:"instant"})};go();requestAnimationFrame(go);addEventListener("load",go,{once:true});[300,900,1800].forEach(ms=>setTimeout(go,ms))}
-p.querySelector(".fe-x").addEventListener("click",e=>{e.preventDefault();try{localStorage.removeItem("ownerEdit")}catch(x){}location.hash="#work";location.reload()});
-const msg=t=>{$("fe-m").textContent=t},th=v=>`<img src="https://img.youtube.com/vi/${v}/default.jpg" alt="" width="64" height="48">`;
-const list=()=>{$("fe-c").textContent=FILMS.length;
- $("fe-l").innerHTML=FILMS.map((f,i)=>`<li>${th(f.v)}<span class="fe-t">${esc(f.title)}<small>${esc(f.type)}</small></span><span class="fe-ac"><button type="button" class="fe-b" data-e="${i}" aria-label="Edit ${esc(f.title)}, ${esc(f.type)}">Edit</button><button type="button" class="fe-b fe-del" data-i="${i}" aria-label="Remove ${esc(f.title)}, ${esc(f.type)}">Remove</button></span></li>`).join("");
- $("fe-h").innerHTML=[["feature","Large card"],["mini","Small card"]].map(([k,n])=>`<li>${th(HERO[k][0])}<span class="fe-t">${esc(HERO[k][1])}<small>${n} · ${esc(HERO[k][2])}</small></span><span class="fe-ac"><button type="button" class="fe-b" data-h="${k}" aria-label="Replace the ${n.toLowerCase()}">Replace</button></span></li>`).join("")};
-list();
-let ed=-1;
-const label=()=>{$("fe-s").textContent=ed>=0?"Save changes":$("fe-w").value=="grid"?"Add video":"Replace card"};
-$("fe-w").addEventListener("change",()=>{ed=-1;label()});
-const fill=(w,[v,t,y])=>{$("fe-w").value=w;$("fe-u").value="https://www.youtube.com/watch?v="+v;$("fe-t").value=t;
- if(![...$("fe-y").options].some(o=>o.value===y))$("fe-y").add(new Option(y,y));$("fe-y").value=y;label();$("fe-f").scrollIntoView({block:"center"});$("fe-u").focus()};
-$("fe-l").addEventListener("click",e=>{const b=e.target.closest("button[data-e]");if(!b)return;const f=FILMS[+b.dataset.e];ed=+b.dataset.e;fill("grid",[f.v,f.title,f.type]);msg("Change what you need, then click “Save changes”.")});
-$("fe-h").addEventListener("click",e=>{const b=e.target.closest("button[data-h]");if(!b)return;ed=-1;fill(b.dataset.h,HERO[b.dataset.h]);msg("Change the link, names or type, then click “Replace card”.")});
-const commit=()=>{try{localStorage.setItem(KEY,JSON.stringify(FILMS.map(row)));localStorage.setItem(HK,JSON.stringify(HERO));localStorage.setItem("filmsBase",SIG)}catch(e){msg("Couldn’t save the change in this browser.");return}location.hash="#fedit";location.reload()};
-$("fe-f").addEventListener("submit",e=>{e.preventDefault();const v=parse($("fe-u").value),w=$("fe-w").value,t=$("fe-t").value.trim(),y=$("fe-y").value;
- if(!v){msg("That doesn’t look like a YouTube link. Paste the video’s address, e.g. https://www.youtube.com/watch?v=…");return}
- if(w=="grid"){if(FILMS.some((f,i)=>f.v===v&&i!==ed)){msg("That video is already in the grid.");return}
-  if(ed>=0)FILMS[ed]=Object.assign({},FILMS[ed],{v,title:t,type:y});else FILMS.unshift({v,title:t,type:y,meta:""})}
- else HERO[w]=[v,t,y];commit()});
-$("fe-l").addEventListener("click",e=>{const b=e.target.closest("button[data-i]");if(!b)return;const f=FILMS[+b.dataset.i];
- if(FILMS.length<2){msg("Keep at least one film in the grid.");return}
- if(!confirm("Remove “"+f.title+" – "+f.type+"” from the film grid?"))return;FILMS.splice(+b.dataset.i,1);commit()});
-$("fe-r").onclick=()=>{if(!confirm("Discard your unpublished changes and go back to the published list?"))return;try{localStorage.removeItem(KEY);localStorage.removeItem(HK);localStorage.removeItem("filmsBase")}catch(e){}location.hash="#fedit";location.reload()};
-const J=o=>JSON.stringify(o).replace(/</g,"\\u003c");
-const build=()=>"/* Film list. Edited by the owner editor (?edit). Replacing index.html does not change this file. */\nwindow.SITE_HERO="+J(HERO)+";\nwindow.SITE_FILMS=[\n"+FILMS.map(f=>J(row(f))).join(",\n")+"\n];\n";
-$("fe-d").onclick=()=>{try{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([build()],{type:"text/javascript"}));a.download="films.js";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1e4);msg("Downloaded films.js. Upload it to GitHub in place of the current films.js to publish these changes.")}catch(e){msg("Couldn’t download the file.")}};
-/* One-click publish: commits index.html to this site's GitHub repository (GitHub Pages then redeploys). The token lives only in this browser. */
-const TK="ghToken",tok=()=>{try{return localStorage.getItem(TK)||""}catch(e){return ""}};
-const owner=location.hostname.split(".")[0],repo=location.hostname.endsWith(".github.io")&&location.pathname.split("/")[1]||location.hostname,API="https://api.github.com/repos/"+owner+"/"+repo+"/contents/films.js";
-const b64d=b=>new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\s/g,"")),c=>c.charCodeAt(0)));
-const b64e=t=>{const u=new TextEncoder().encode(t);let x="";for(let i=0;i<u.length;i+=8192)x+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(x)};
-$("fe-ks").onclick=()=>{const v=$("fe-k").value.trim();if(!v){msg("Paste your token first.");return}try{localStorage.setItem(TK,v)}catch(e){msg("Couldn’t save the token in this browser.");return}$("fe-k").value="";$("fe-set").open=false;msg("Token saved. You can now click “Publish to website”.")};
-$("fe-kf").onclick=()=>{try{localStorage.removeItem(TK)}catch(e){}msg("Token removed from this browser.")};
-$("fe-p").onclick=async()=>{const t=tok();if(!t){$("fe-set").open=true;msg("Publishing needs a one-time setup. Follow the steps below, then click Publish again.");return}
- const H={Authorization:"Bearer "+t,Accept:"application/vnd.github+json"},btn=$("fe-p");btn.disabled=true;msg("Publishing…");
- try{const g=await fetch(API,{headers:H,cache:"no-store"});
-  if(g.status==401||g.status==403){throw new Error("auth")}if(!g.ok&&g.status!=404)throw new Error("http "+g.status);
-  const cur=g.ok?await g.json():null,out=build();
-  const w=await fetch(API,{method:"PUT",headers:Object.assign({"Content-Type":"application/json"},H),body:JSON.stringify(Object.assign({message:"Update films",content:b64e(out)},cur?{sha:cur.sha}:{}))});
-  if(w.status==401||w.status==403)throw new Error("auth");if(w.status==404)throw new Error("notfound");if(!w.ok)throw new Error("http "+w.status);
-  msg("Published. Your site updates in about a minute; refresh the page to see it.")}
- catch(e){msg(e.message=="auth"?"GitHub refused the token. It may have expired or lack “Contents: Read and write” for this repository. Use “Forget token” and set up a new one.":e.message=="notfound"?"Couldn’t update films.js in the "+repo+" repository, or the token doesn’t have access to it.":"Couldn’t publish ("+e.message+"). Try “Download file instead”.")}
- btn.disabled=false}})();
+setHero("feature",HERO.feature);setHero("mini",HERO.mini)})();
 
 /* Brief form -> form backend (falls back to the email app when no endpoint is set) */
 
@@ -281,7 +200,7 @@ document.addEventListener("visibilitychange",sync)};
 const go=()=>("requestIdleCallback" in window?requestIdleCallback(startReel,{timeout:3000}):setTimeout(startReel,1500));
 if(document.readyState==="complete")go();else addEventListener("load",go,{once:true})})();
 /* Film grid + player */
-const SLIDES=6; /* how many recent films the home page slider shows */
+const SLIDES=8; /* how many recent films the home page slider shows */
 $("grid").innerHTML=FILMS.slice(0,SLIDES).map((f,i)=>`<button class="film" data-v="${f.v}" aria-label="Watch ${esc(f.title)}, ${esc(f.type)}, on YouTube"><img src="https://img.youtube.com/vi/${f.v}/hq720.jpg" onerror="this.onerror=null;this.src=this.src.replace('hq720','hqdefault')" alt="" ${i?'loading="lazy"':'fetchpriority="high"'} decoding="async" width="480" height="360"><span class="play"></span><span class="cap">${esc(f.title)}<small>${esc(f.type)}${f.meta?" · "+esc(f.meta):""}</small></span></button>`).join("");
 /* Recent work slider: swipe, arrows and dots. Cards are the slides. */
 (()=>{const car=$("grid"),cards=[...car.children].filter(c=>c.matches(".film")),dots=$("wdots"),pv=$("wprev"),nx=$("wnext");
@@ -385,12 +304,9 @@ const tb=$("top"),hd=$("site"),tp=()=>{if(tb)tb.classList.toggle("show",scrollY>
 addEventListener("scroll",tp,{passive:true});
 if(tb)tb.onclick=()=>scrollTo({top:0,behavior:reduce?"auto":"smooth"});tp();
 
-/* Owner unlock: tap the footer logo 5 times quickly, then enter the private code. A single tap still scrolls to the top. */
-(()=>{const a=document.querySelector(".f-brand .brand");if(!a)return;let n=0,t=0;
-a.addEventListener("click",e=>{e.preventDefault();clearTimeout(t);n++;
- if(n>=5){n=0;if(!CFG.editKey)return;const c=prompt("Owner code");if(c===null)return;
-  if(c.trim()===CFG.editKey){try{localStorage.setItem("ownerEdit","1");history.scrollRestoration="manual"}catch(x){}location.hash="#fedit";location.reload()}else alert("That code isn’t right.");return}
- t=setTimeout(()=>{n=0;scrollTo({top:0,behavior:reduce?"auto":"smooth"})},650)})})();
+/* Footer logo: scroll to top */
+(()=>{const a=document.querySelector(".f-brand .brand");if(!a)return;
+a.addEventListener("click",e=>{e.preventDefault();scrollTo({top:0,behavior:reduce?"auto":"smooth"})})})();
 /* Hero glow follows the pointer (desktop only) */
 (()=>{const h=document.querySelector(".hero");if(!h||reduce||!matchMedia("(hover:hover) and (pointer:fine)").matches)return;let r=0,x=0,y=0;
 h.addEventListener("pointermove",e=>{const b=h.getBoundingClientRect();x=e.clientX-b.left;y=e.clientY-b.top;if(!r)r=requestAnimationFrame(()=>{r=0;h.style.setProperty("--mx",x+"px");h.style.setProperty("--my",y+"px")})},{passive:true})})();

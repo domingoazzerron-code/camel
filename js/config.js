@@ -8,7 +8,6 @@ const CFG={
  facebook:"",        // Full page URL
  clients:[],         // Studios you edit for, only with their permission: [{name:"Studio name",logo:"assets/media/studio.svg",url:"https://…"}]. Empty = strip stays hidden.
  tawk:"", // Tawk.to live chat: "propertyId/widgetId" from your Tawk.to widget code. Empty = no chat box.
- editKey:"editfilm", // Private code that unlocks the film editor: open the site once with ?edit=THIS_CODE. Without it, ?edit does nothing.
  booking:""          // Calendly / booking link, e.g. "https://calendly.com/yourname/intro". Shows "Book a call" buttons.
 };
 /* Tawk.to live chat. Tawk's own bubble can't be sized or aligned exactly, so it is hidden and replaced by our own
