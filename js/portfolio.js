@@ -2,7 +2,7 @@
 (()=>{
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const track=(n,p)=>{try{if(window.plausible)window.plausible(n,p?{props:p}:undefined)}catch(e){}};
+const track=(n,p)=>{try{if(window.umami)window.umami.track(n,p)}catch(e){}};
 
 const labelOf=t=>{
   const s=String(t||"");

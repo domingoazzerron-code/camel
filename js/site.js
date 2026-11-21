@@ -2,10 +2,9 @@ const $=id=>document.getElementById(id);
 const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-/* ===== Analytics (Plausible) + click tracking ===== */
-if(CFG.plausibleDomain){window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)};
- const sc=document.createElement("script");sc.defer=true;sc.dataset.domain=CFG.plausibleDomain;sc.src="https://plausible.io/js/script.js";document.head.appendChild(sc)}
-const track=(n,p)=>{try{if(window.plausible)window.plausible(n,p?{props:p}:undefined)}catch(e){}};
+/* ===== Analytics (Umami) + click tracking ===== */
+if(CFG.umamiId){const sc=document.createElement("script");sc.defer=true;sc.src="https://cloud.umami.is/script.js";sc.setAttribute("data-website-id",CFG.umamiId);document.head.appendChild(sc)}
+const track=(n,p)=>{try{if(window.umami)window.umami.track(n,p)}catch(e){}};
 document.addEventListener("click",e=>{const a=e.target.closest("[data-ev]");if(a)track(a.dataset.ev,a.dataset.label?{label:a.dataset.label}:undefined)});
 
 /* ===== Contact channels, footer socials, privacy dialog ===== */
@@ -19,7 +18,7 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-ev]");if(a
  const a=(c,cls)=>`<a ${cls?`class="${cls}" `:""}href="${esc(c[1])}" target="_blank" rel="noopener" data-ev="Channel Click" data-label="${esc(c[0])}">${esc(c[0])}</a>`;
  if(all.length&&$("chan")){$("chan").innerHTML=`<span class="chan-l">Or reach us on</span>`+all.map(c=>a(c,"btn ghost")).join("");$("chan").hidden=false}
  $("soc").innerHTML=ch.map(c=>a(c)).join("");
- $("pv-an").hidden=!CFG.plausibleDomain;
+ $("pv-an").hidden=!CFG.umamiId;
  const pv=$("pv");document.querySelectorAll(".pvopen").forEach(b=>b.addEventListener("click",()=>pv.showModal()));
  $("pvc").onclick=()=>pv.close();pv.addEventListener("click",e=>{if(e.target===pv)pv.close()})})();
 

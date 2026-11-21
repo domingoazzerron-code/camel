@@ -2,7 +2,7 @@
 const CFG={
  formEndpoint:"https://formspree.io/f/meaawkaq",    // Form backend URL, e.g. "https://formspree.io/f/xxxxxxxx". Empty = falls back to opening the visitor's email app.
  formKey:"",         // Only for providers that need an access key (e.g. Web3Forms). Otherwise leave empty.
- plausibleDomain:"", // Your site's domain for Plausible analytics, e.g. "yourdomain.com". Empty = no analytics.
+ umamiId:"40613834-9b2e-46df-a7da-6314bd0a9638", // Umami website ID (Umami Cloud, free Hobby plan). Empty = no analytics.
  whatsapp:"639703895918",        // Number with country code, digits only, e.g. "639171234567"
  instagram:"https://instagram.com/marcusweddingstudio",       // Full profile URL, e.g. "https://instagram.com/yourhandle"
  youtube:"https://www.youtube.com/@MarcusWeddingEditor",  // Full channel URL

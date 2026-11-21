@@ -1891,3 +1891,28 @@ html.has-wa .top{bottom:calc(4.1rem + env(safe-area-inset-bottom,0px))}
 html:has(#pg-pricing) .wa-fab{display:none!important}
 html:has(#pg-pricing).has-wa .top{bottom:calc(1.25rem + env(safe-area-inset-bottom,0px))}
 @media(max-width:520px){html:has(#pg-pricing).has-wa .top{bottom:calc(.9rem + env(safe-area-inset-bottom,0px))}}
+
+/* ===== Touch targets: bigger hit areas without changing how things look ===== */
+.dots2{gap:1.25rem}
+.dots2 button::before{inset:-18px -10px}
+.try-l a{padding:.7rem 0}
+@media (pointer:coarse){
+ .foot a,.foot .f-links a{padding:.65rem 0}
+ .foot .brand{padding:0}
+ .f-links .f-sep{margin-top:.4rem;padding-top:.4rem}
+}
+.hero .promise{justify-content:flex-start;margin-left:0;margin-right:0}
+
+/* ===== Simpler desktop menu: Films overlaps Portfolio, Tools lives in the footer. The phone menu keeps every link. ===== */
+@media(min-width:980px){
+ #nav>a[href$="#work"],#nav>a[href$="tools.html"]{display:none}
+}
+/* ===== Phones and tablets: show a film right after the buttons, so visitors see your work on the first screen ===== */
+@media(max-width:860px){
+ .hero{row-gap:0}
+ .hero-t{display:contents}
+ .hero-t>*{order:1}
+ .hero-t>.promise,.hero-t>.proof{order:3}
+ .hero-v{order:2;margin-top:1.75rem;padding-bottom:3rem}
+ .hero .promise{margin-top:0}
+}

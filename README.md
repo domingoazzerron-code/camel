@@ -13,5 +13,5 @@ Static site for marcusweddingstudio.com. No build step: edit the files and uploa
 ```
 
 - Edit film list in `js/films.js`
-- Site settings (WhatsApp, forms, analytics) in `js/config.js`
+- Site settings (WhatsApp, forms, Umami analytics ID) in `js/config.js`
 - Most page behaviour lives in `js/site.js`; portfolio has its own `js/portfolio.js`
