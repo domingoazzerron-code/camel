@@ -30,7 +30,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Hanken+Grotesk:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Hanken+Grotesk:wght@400;500;600&display=swap"></noscript>
 <script>if(!matchMedia("(prefers-reduced-motion:reduce)").matches){document.documentElement.classList.add("anim");setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove("anim")},1200)}</script>
 <script>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)})()</script>
-<link rel="stylesheet" href="css/site.css?v=20261121d">
+<link rel="stylesheet" href="css/site.css?v=20261121e">
 <noscript><style>.rv{opacity:1!important;translate:none!important}</style></noscript><script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*"},"eagerness":"moderate"}]}</script>
 </head>
 <body>
@@ -136,7 +136,7 @@
 <dialog id="pl" aria-label="Film player"><iframe id="yt" title="Film player" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe><div class="dtxt"><h3 id="pt" aria-live="polite"></h3><div class="pnav"><button type="button" id="pp" aria-label="Previous film">‹</button><button type="button" id="pn" aria-label="Next film">›</button></div><button type="button" id="pr">Use as reference</button><a class="btn" id="ytl" target="_blank" rel="noopener">Watch on YouTube</a><button type="button" id="pc">Close</button></div></dialog>
 
 <script src="js/config.js?v=20261121a"></script>
-<script src="js/films.js?v=20261121a"></script>
+<script src="js/films.js?v=20261122a"></script>
 <script>
 const $=id=>document.getElementById(id);
 const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
@@ -163,9 +163,9 @@ document.addEventListener("click",e=>{const a=e.target.closest("[data-ev]");if(a
 
 if(CFG.clients.length){$("cl").innerHTML=CFG.clients.map(c=>{const i=c.logo?`<img src="${esc(c.logo)}" alt="${esc(c.name)}" loading="lazy" decoding="async">`:esc(c.name);return `<li>${c.url?`<a href="${esc(c.url)}" target="_blank" rel="noopener">${i}</a>`:i}</li>`}).join("");$("clients").hidden=false}
 /* Films: [YouTube ID, title, type, optional details such as "4:12 · Cinematic"] */
-const SIG=JSON.stringify([window.SITE_FILMS||[],window.SITE_HERO||{}]);
+const SIG=JSON.stringify([window.SITE_RECENT||window.SITE_FILMS||[],window.SITE_HERO||{}]);
 const HERO=Object.assign({feature:["","",""],mini:["","",""]},JSON.parse(JSON.stringify(window.SITE_HERO||{})));
-const FILMS=(window.SITE_FILMS||[]).map(([v,title,type,meta])=>({v,title,type,meta:meta||""}));
+const FILMS=(window.SITE_RECENT||window.SITE_FILMS||[]).map(([v,title,type,meta])=>({v,title,type,meta:meta||""}));
 /* Owner edit mode: open the page with ?edit to add, replace or remove films (grid and the two large cards). Edits show in this browser until you publish them; Publish/Download saves them to films.js, so replacing index.html never undoes them. */
 (()=>{const KEY="filmsEdit",HK="heroEdit",row=f=>[f.v,f.title,f.type].concat(f.meta?[f.meta]:[]),ID=/^[\w-]{11}$/;
 try{const fb=localStorage.getItem("filmsBase");if(fb!==null&&fb!==SIG){localStorage.removeItem(KEY);localStorage.removeItem(HK);localStorage.removeItem("filmsBase")}}catch(e){}
@@ -381,9 +381,9 @@ io.observe(document.querySelector(".hero"));[...map.keys(),...Object.keys(alias)
 if(!q.length)return;const sc=document.createElement("script");sc.type="application/ld+json";sc.textContent=JSON.stringify({"@context":"https://schema.org","@type":"FAQPage",mainEntity:q});document.head.appendChild(sc)})();
 
 /* Header shadow line + back to top */
-const tb=$("top"),hd=$("site"),tp=()=>{tb.classList.toggle("show",scrollY>600);hd.classList.toggle("scrolled",scrollY>8)};
+const tb=$("top"),hd=$("site"),tp=()=>{if(tb)tb.classList.toggle("show",scrollY>600);if(hd)hd.classList.toggle("scrolled",scrollY>8)};
 addEventListener("scroll",tp,{passive:true});
-tb.onclick=()=>scrollTo({top:0,behavior:reduce?"auto":"smooth"});tp();
+if(tb)tb.onclick=()=>scrollTo({top:0,behavior:reduce?"auto":"smooth"});tp();
 
 /* Owner unlock: tap the footer logo 5 times quickly, then enter the private code. A single tap still scrolls to the top. */
 (()=>{const a=document.querySelector(".f-brand .brand");if(!a)return;let n=0,t=0;
