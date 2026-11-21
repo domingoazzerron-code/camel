@@ -28,9 +28,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Hanken+Grotesk:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Hanken+Grotesk:wght@400;500;600&display=swap"></noscript>
-<script>if(!matchMedia("(prefers-reduced-motion:reduce)").matches){document.documentElement.classList.add("anim");setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove("anim")},3000)}</script>
+<script>if(!matchMedia("(prefers-reduced-motion:reduce)").matches){document.documentElement.classList.add("anim");setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove("anim")},1200)}</script>
 <script>(function(){var t=null;try{t=localStorage.getItem("theme")}catch(e){}if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light";document.documentElement.setAttribute("data-theme",t)})()</script>
-<link rel="stylesheet" href="css/site.css?v=20261121a">
+<link rel="stylesheet" href="css/site.css?v=20261121c">
 <noscript><style>.rv{opacity:1!important;translate:none!important}</style></noscript><script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*"},"eagerness":"moderate"}]}</script>
 </head>
 <body>
@@ -268,15 +268,18 @@ const mcpEl=$("mcp");if(mcpEl){const mt=mcpEl.textContent;mcpEl.addEventListener
 /* Hero showreel: optional looping clip over the feature thumbnail. Add assets/media/showreel.mp4 to turn it on;
    if the file is missing, unsupported, or the visitor prefers reduced motion / saves data, the thumbnail stays. */
 (()=>{const host=document.querySelector(".film.feature"),img=host&&host.querySelector("img");
-if(!img||reduce||(navigator.connection&&navigator.connection.saveData))return;
-const v=document.createElement("video");v.className="reel";v.muted=true;v.defaultMuted=true;v.loop=true;v.autoplay=true;v.playsInline=true;
+const nc=navigator.connection;
+if(!img||reduce||(nc&&(nc.saveData||/(^|-)2g|3g/.test(nc.effectiveType||""))))return;
+const startReel=()=>{const v=document.createElement("video");v.className="reel";v.muted=true;v.defaultMuted=true;v.loop=true;v.autoplay=true;v.playsInline=true;
 v.setAttribute("muted","");v.setAttribute("playsinline","");v.setAttribute("aria-hidden","true");v.tabIndex=-1;v.preload="metadata";v.disablePictureInPicture=true;
 v.addEventListener("playing",()=>v.classList.add("on"),{once:true});
 v.addEventListener("error",()=>v.remove());
 img.after(v);v.src="assets/media/showreel.mp4";
 let vis=true;const sync=()=>{if(vis&&!document.hidden){const p=v.play();if(p&&p.catch)p.catch(()=>{})}else v.pause()};
 if("IntersectionObserver" in window)new IntersectionObserver(e=>{vis=e[0].isIntersecting;sync()}).observe(host);
-document.addEventListener("visibilitychange",sync)})();
+document.addEventListener("visibilitychange",sync)};
+const go=()=>("requestIdleCallback" in window?requestIdleCallback(startReel,{timeout:3000}):setTimeout(startReel,1500));
+if(document.readyState==="complete")go();else addEventListener("load",go,{once:true})})();
 /* Film grid + player */
 const SLIDES=6; /* how many recent films the home page slider shows */
 $("grid").innerHTML=FILMS.slice(0,SLIDES).map((f,i)=>`<button class="film" data-v="${f.v}" aria-label="Watch ${esc(f.title)}, ${esc(f.type)}, on YouTube"><img src="https://img.youtube.com/vi/${f.v}/hq720.jpg" onerror="this.onerror=null;this.src=this.src.replace('hq720','hqdefault')" alt="" ${i?'loading="lazy"':'fetchpriority="high"'} decoding="async" width="480" height="360"><span class="play"></span><span class="cap">${esc(f.title)}<small>${esc(f.type)}${f.meta?" · "+esc(f.meta):""}</small></span></button>`).join("");
