@@ -101,42 +101,11 @@ nav a[aria-current="true"]{color:var(--ink)}
 @media(hover:hover){.film:hover .play{transform:scale(1.15)}}
 .film span.cap{position:absolute;inset:auto 0 0 0;padding:3rem 1.1rem 1rem;color:#FBF6F3;background:linear-gradient(transparent,rgba(58,48,41,.8));font:400 1.3rem/1.2 var(--f-display);letter-spacing:-.01em}
 .film small{display:block;margin-top:.3rem;font:500 .8125rem/1.2 var(--f-body);letter-spacing:.02em;opacity:.9}
-.fedit{margin:0 0 2.5rem;padding:clamp(1rem,3vw,1.75rem);border:1px solid var(--line);border-radius:14px;background:var(--card);font-family:var(--f-body);display:grid;gap:1rem}
-.fe-hd{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem .75rem}
-.fe-hd h3{font-size:1.6rem}
-.fe-chip{display:inline-flex;align-items:center;gap:.45rem;padding:.35rem .7rem;border:1px solid var(--line);border-radius:999px;font:500 .75rem/1 var(--f-body);letter-spacing:.02em;color:var(--muted)}
-.fe-chip::before{content:"";width:.4rem;height:.4rem;border-radius:50%;background:var(--brass,var(--accent))}
-.fe-x{margin-left:auto;padding:.5rem .25rem;font:500 .9375rem/1 var(--f-body);color:var(--muted);text-decoration:none}.fe-x:hover{color:var(--ink)}
-.fe-card{display:grid;gap:.85rem;margin:0;padding:1.1rem;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
-.fe-s{margin:0;font:600 .75rem/1 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.fe-s span{margin-left:.35rem;padding:.15rem .5rem;border-radius:999px;background:var(--card);letter-spacing:0}
-.fe-g{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
-.fe-full{grid-column:1/-1}
-.fedit label{display:grid;gap:.4rem;min-width:0;font-weight:500;font-size:.9375rem;letter-spacing:.01em}
 .fedit input,.fedit select{box-sizing:border-box;width:100%;max-width:100%;min-width:0;min-height:3rem;padding:.75rem .9rem;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:400 1rem var(--f-body);transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
 .fedit input:focus-visible,.fedit select:focus-visible{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 28%,transparent)}
-.fe-card>.btn{justify-self:start}
-.fe-ls{list-style:none;margin:0;padding:0;display:grid}
 #fe-l{max-height:24rem;overflow:auto;overscroll-behavior:contain}
-.fe-ls li{display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:.25rem .9rem;padding:.7rem 0;border-top:1px solid var(--line)}
-.fe-ls li:first-child{border-top:0;padding-top:0}.fe-ls li:last-child{padding-bottom:0}
-.fe-ls img{width:72px;height:48px;object-fit:cover;border-radius:8px;background:var(--card)}
-.fe-t{min-width:0;font-weight:600;font-size:1rem;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.fe-t small{display:block;font-weight:400;font-size:.875rem;color:var(--muted);white-space:normal}
-.fe-ac{display:flex;gap:.4rem}
-.fe-b{min-height:2.25rem;padding:.4rem .9rem;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);font:500 .875rem/1 var(--f-body);cursor:pointer;transition:background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease)}
-.fe-b:hover{background:var(--card);border-color:var(--accent)}
-.fe-del{color:var(--muted)}.fe-del:hover{color:var(--accent)}
 .fe-b:focus-visible,.fe-x:focus-visible,.fe-set summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.fe-a{display:flex;flex-wrap:wrap;gap:.6rem}.fe-a .btn{white-space:nowrap}
-.fe-m{margin:0;padding:.7rem .9rem;border-left:3px solid var(--accent);border-radius:2px 8px 8px 2px;background:var(--bg);color:var(--ink);font-size:.9375rem;line-height:1.5}.fe-m:empty{display:none}
-.fe-set{font-size:.9375rem}.fe-set summary{cursor:pointer;font-weight:500;color:var(--muted)}
-.fe-set ol{margin:.75rem 0;padding-left:1.25rem;display:grid;gap:.35rem;color:var(--muted)}.fe-set a{color:var(--accent)}
-.fe-tk{display:flex;flex-wrap:wrap;gap:.6rem}.fe-tk input{flex:1 1 14rem;width:auto}
 @media(max-width:560px){
-.fe-g{grid-template-columns:1fr}
-.fe-ls li{grid-template-columns:56px 1fr}.fe-ls img{width:56px;height:40px}
-.fe-ac{grid-column:2}
 .fe-card>.btn,.fe-a .btn{flex:1 1 100%;justify-self:stretch}.fe-a .btn.ghost{flex:1 1 calc(50% - .3rem);padding-left:.5rem;padding-right:.5rem}}
 
 /* about */
@@ -836,10 +805,6 @@ nav#nav .snd-row[aria-pressed="false"] .off{display:block}
 @media(max-width:360px){.pkg-grid{grid-template-columns:1fr}.pkg{aspect-ratio:auto}}
 
 /* owner pencil: only added to the page for the owner, sits above the back-to-top button */
-.edit-fab{position:fixed;right:1.25rem;bottom:calc(9.25rem + env(safe-area-inset-bottom,0px));z-index:20;display:grid;place-items:center;width:52px;height:52px;padding:0;border-radius:50%;border:1.5px solid var(--brass);background:var(--bg);color:var(--brass);cursor:pointer;box-shadow:0 10px 24px -8px rgba(58,48,41,.4);transition:transform .3s var(--ease),background .3s var(--ease),color .3s var(--ease)}
-.edit-fab svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-@media(hover:hover){.edit-fab:hover{background:var(--brass);color:var(--bg)}}
-.edit-fab:active{transform:scale(.94)}
 
 /* ===== Mobile menu: one dark-mode toggle (a row in the menu), header button hidden on phones/tablets ===== */
 .theme-row{display:none}
@@ -915,7 +880,6 @@ nav#nav .prefs>button:first-child{border-radius:12px 12px 0 0}
 .tk-n[hidden]{display:none}
 html.has-chat .wa-fab{bottom:calc(5.75rem + env(safe-area-inset-bottom,0px))}
 html.has-chat .top{bottom:calc(9.75rem + env(safe-area-inset-bottom,0px))}
-html.has-chat .edit-fab{bottom:calc(13.75rem + env(safe-area-inset-bottom,0px))}
 #tawkchat-container{transform-origin:100% 100%;animation:tkIn .3s var(--ease) both}
 html.tk-out #tawkchat-container{animation:tkOut .22s ease-in both}
 @keyframes tkIn{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
@@ -950,8 +914,6 @@ html:not(.fab-seen) .wa-fab:not([hidden]){animation:fabIn .6s var(--ease) .1s bo
 
 /* Back-to-top button removed (element stays in the HTML so the page scripts keep working) */
 .top{display:none!important}
-html.has-chat .edit-fab{bottom:calc(9.75rem + env(safe-area-inset-bottom,0px))}
-html.has-chat:not(.has-wa) .edit-fab{bottom:calc(5.75rem + env(safe-area-inset-bottom,0px))}
 
 /* Page rhythm: tighter top, even gaps between blocks */
 .back{margin-bottom:1rem}
